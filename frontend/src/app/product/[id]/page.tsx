@@ -1,14 +1,16 @@
 import { Product } from '@/lib/types';
 import Image from 'next/image';
 import Link from 'next/link';
+import { fetchProduct } from '@/lib/data';
 
-interface ProductDetailsProps {
-  product: Product;
-}
-
-// export default function ProductDetails({ product }: ProductDetailsProps) {
-export default function ProductDetails() {
-  const product = { id: '1', name: 'Buty Nike', brand: 'Nike', price: 299, size: '42', image: '/buty.webp', description: 'Wygodne buty sportowe Nike' }
+export default async function ProductDetails({
+    params,
+  }: {
+    params: Promise<{ id: number }>
+  }) {
+  
+  const productId = Number((await params).id);
+  const product: Product = await fetchProduct(productId);
 
   return (
     <div className="flex justify-center items-center min-h-screen">
