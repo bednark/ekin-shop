@@ -1,11 +1,11 @@
 namespace ekinshop.Models;
 
 public class Product {
-  public int Id { get; set; }
-  public string Name { get; set; }
-  public string Brand { get; set; }
-  public decimal Price { get; set; }
-  public string Size { get; set; }
-  public string Image { get; set; }
-  public string Description { get; set; }
+  public int? productId { get; set; }
+  public string? name { get; set; }
+  public string? brand { get; set; }
+  public decimal? price { get; set; }
+  public string? size { get; set; }
+  public string? image { get; set; }
+  public string? description { get; set; }
 }
