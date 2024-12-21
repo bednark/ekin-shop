@@ -11,7 +11,7 @@ export default function ProductList({ products }: ProductListProps) {
       <h2 className="text-4xl font-bold mt-24 mb-24 text-center">Nasza oferta</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-8">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.productId} product={product} />
         ))}
       </div>
     </div>

@@ -16,7 +16,7 @@ export const fetchProducts = async (): Promise<Product[]> => {
 export const fetchProduct = async (id: number): Promise<Product> => {
   try {
     const response = await axios.get(API_URL + '/product/' + id);
-    return response.data;
+    return response.data[0];
   } catch (error) {
     console.error('Error posting data:', error);
     throw error;

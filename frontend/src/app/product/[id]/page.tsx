@@ -3,6 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { fetchProduct } from '@/lib/data';
 
+export const dynamic = "force-dynamic";
+
 export default async function ProductDetails({
     params,
   }: {
@@ -17,7 +19,7 @@ export default async function ProductDetails({
       <div className="w-full max-w-6xl p-8">
         <div className="flex space-x-8">
           <div className="w-1/2">
-            <Image src={product.image} alt={product.name} width={600} height={600} className="w-full h-auto" />
+            <Image src={`${process.env.BLOB_URL}/products/${product.image}`} alt={product.name} width={600} height={600} priority={true} className="w-full h-auto" />
           </div>
           <div className="w-1/2 space-y-8">
             <h1 className="text-4xl font-bold">{product.name}</h1>

@@ -3,6 +3,8 @@ import ProductList from '@/components/products-list/ProductsList';
 import { Product } from '@/lib/types';
 import { fetchProducts } from '@/lib/data';
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const products: Product[] = await fetchProducts();
 

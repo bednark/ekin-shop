@@ -11,14 +11,14 @@ export default function ProductCard({ product }: ProductCardProps) {
     <div 
       className="border rounded-lg overflow-hidden shadow-md hover:shadow-xl transition cursor-pointer"
     >
-      <Image src={product.image} alt={product.name} width={500} height={500} className="w-full h-auto" />
+      <Image src={`${process.env.BLOB_URL}/products/${product.image}`} alt={product.name} width={500} height={500} className="w-full h-auto" />
       <div className="p-4">
         <h2 className="font-bold text-lg">{product.name}</h2>
         <p className="text-sm text-gray-600">Marka: {product.brand}</p>
         <p className="text-sm text-gray-600">Rozmiar: {product.size}</p>
         <p className="mt-2 font-bold text-xl">{product.price} PLN</p>
         <Link className="mt-4 bg-blue-500 text-white py-2 px-4 rounded block text-center"
-          href={`/product/${product.id}`}
+          href={`/product/${product.productId}`}
         >
           Przejdź do szczegółów produktu
         </Link>
