@@ -6,9 +6,8 @@ export default function HeroImage() {
       <Image
         src="/hero-image.jpg"
         alt="Hero Image"
-        layout="fill"
-        objectFit="cover"
-        className="opacity-60"
+        fill
+        className="opacity-60 h-auto w-full object-cover"
       />
       <div className="relative z-10 text-center">
         <h1 className="text-4xl md:text-6xl font-bold">Ekin shop</h1>

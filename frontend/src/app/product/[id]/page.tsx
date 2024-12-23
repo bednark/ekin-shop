@@ -1,21 +1,25 @@
 import { Product } from '@/lib/types';
 import Image from 'next/image';
 import Link from 'next/link';
+import { fetchProduct } from '@/lib/data';
 
-interface ProductDetailsProps {
-  product: Product;
-}
+export const dynamic = "force-dynamic";
 
-// export default function ProductDetails({ product }: ProductDetailsProps) {
-export default function ProductDetails() {
-  const product = { id: '1', name: 'Buty Nike', brand: 'Nike', price: 299, size: '42', image: '/buty.webp', description: 'Wygodne buty sportowe Nike' }
+export default async function ProductDetails({
+    params,
+  }: {
+    params: Promise<{ id: number }>
+  }) {
+  
+  const productId = Number((await params).id);
+  const product: Product = await fetchProduct(productId);
 
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="w-full max-w-6xl p-8">
         <div className="flex space-x-8">
           <div className="w-1/2">
-            <Image src={product.image} alt={product.name} width={600} height={600} className="w-full h-auto" />
+            <Image src={`${process.env.BLOB_URL}/products/${product.image}`} alt={product.name} width={600} height={600} priority={true} className="w-full h-auto" />
           </div>
           <div className="w-1/2 space-y-8">
             <h1 className="text-4xl font-bold">{product.name}</h1>

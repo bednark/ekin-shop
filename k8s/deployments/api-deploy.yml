@@ -1,0 +1,66 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ekin-shop-api
+  labels:
+    app: ekin-shop
+    component: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ekin-shop
+      component: api
+  template:
+    metadata:
+      labels:
+        app: ekin-shop
+        component: api
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: ekin-shop-api
+          image: ekinshop.azurecr.io/api:1.0
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            runAsUser: 1001
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - all
+          env:
+            - name: CosmosDb__AccountEndpoint
+              valueFrom:
+                configMapKeyRef:
+                  name: api-config
+                  key: CosmosDb__AccountEndpoint
+            - name: CosmosDb__AccountKey
+              valueFrom:
+                secretKeyRef:
+                  name: cosmosdb-secret
+                  key: CosmosDb-AccountKey
+            - name: CosmosDb__DatabaseName
+              valueFrom:
+                configMapKeyRef:
+                  name: api-config
+                  key: CosmosDb__DatabaseName
+          volumeMounts:
+            - name: secrets-store-inline
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "512Mi"
+      volumes:
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: azure-keyvault
