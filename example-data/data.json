@@ -1,0 +1,38 @@
+[
+  {
+    "productId": "1",
+    "name": "Buty nike",
+    "brand": "Nike",
+    "price": 299,
+    "size": "42",
+    "image": "buty.webp",
+    "description": "Wygodne buty sportowe Nike"
+  },
+  {
+    "productId": "2",
+    "name": "Kurtka Adidas",
+    "brand": "Adidas",
+    "price": 499,
+    "size": "M",
+    "image": "kurtka.webp",
+    "description": "Stylowa kurtka Adidas na każdą pogodę"
+  },
+  {
+    "productId": "3",
+    "name": "T-shirt Puma",
+    "brand": "Puma",
+    "price": 99,
+    "size": "L",
+    "image": "t-shirt.webp",
+    "description": "Komfortowy T-shirt Puma"
+  },
+  {
+    "productId": "4",
+    "name": "Spodnie Levi's",
+    "brand": "Levi's",
+    "price": 249,
+    "size": "32",
+    "image": "spodnie.webp",
+    "description": "Klasyczne spodnie Levi's"
+  }
+]
