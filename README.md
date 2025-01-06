@@ -1,3 +1,16 @@
+# Ekinshop Project
+
+Ekinshop is a modern e-commerce web application built using cutting-edge technologies such as **Next.js**, **.NET**, and **Microsoft Azure**. The platform allows users to browse products, view details, and manage a shopping cart. It is designed with scalability, security, and performance in mind, leveraging Azure services like CosmosDB, Blob Storage, and AKS.
+
+## Prerequisites
+- Azure CLI
+- Terraform
+- Docker
+- Kubernetes CLI
+- Python
+- Access to an Azure subscription
+
+
 ## Deployment workflow for ekinshop project
 
 **1. Login to Azure CLI**
@@ -231,6 +244,12 @@ kubectl apply -f configmap/frontend-config.yml
 kubectl apply -f deployments/frontend-deploy.yml
 kubectl apply -f services/frontend-service.yml
 cd ..
+```
+
+## Run the application
+After successful deploy application run below command and get public IP of application
+```bash
+kubectl get services
 ```
 
 ## Destroy application
