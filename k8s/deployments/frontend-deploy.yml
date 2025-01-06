@@ -21,7 +21,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: ekin-shop-frontend
-          image: ekinshop.azurecr.io/frontend:1.0
+          image: ekinshop.azurecr.io/frontend:latest
           imagePullPolicy: IfNotPresent
           securityContext:
             runAsUser: 1001

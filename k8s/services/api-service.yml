@@ -6,7 +6,6 @@ metadata:
     app: ekin-shop
     component: api-service
 spec:
-  type: LoadBalancer
   selector:
     app: ekin-shop
     component: api

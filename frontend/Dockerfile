@@ -1,4 +1,4 @@
-FROM node:22.12-alpine AS base
+FROM node:22-alpine AS base
 
 RUN npm install -g npm@11.0.0
 RUN npm install -g pnpm

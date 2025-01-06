@@ -110,7 +110,7 @@ resource "azurerm_container_registry" "container_registry" {
 }
 
 resource "azurerm_key_vault" "key_vault" {
-  name                            = "ekinshop-${random_string.unique_suffix.result}"
+  name                            = "ekinshop${random_string.unique_suffix.result}"
   resource_group_name             = azurerm_resource_group.rg.name
   location                        = var.location
   sku_name                        = "standard"
@@ -129,7 +129,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
   dns_prefix          = "ekinshop"
   tags                = var.tags
 
-
   default_node_pool {
     name       = "default"
     node_count = 2
@@ -145,8 +144,22 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 }
 
-resource "azurerm_role_assignment" "kv_secrets_user" {
-  principal_id         = azurerm_kubernetes_cluster.aks.identity[0].principal_id
-  role_definition_name = "Key Vault Secrets User"
-  scope                = azurerm_key_vault.key_vault.id
+resource "azurerm_role_assignment" "kv_admin" {
+  scope               = azurerm_key_vault.key_vault.id
+  role_definition_name = "Key Vault Administrator"
+  principal_id        = data.azurerm_client_config.current.object_id
+}
+
+resource "azurerm_cosmosdb_sql_role_assignment" "cosmosdb_role_assignment" {
+  account_name         = azurerm_cosmosdb_account.cosmosdb.name
+  resource_group_name  = azurerm_resource_group.rg.name
+  role_definition_id   = "/subscriptions/${data.azurerm_client_config.current.subscription_id}/resourceGroups/${azurerm_resource_group.rg.name}/providers/Microsoft.DocumentDB/databaseAccounts/${azurerm_cosmosdb_account.cosmosdb.name}/sqlRoleDefinitions/00000000-0000-0000-0000-000000000002"
+  scope                = azurerm_cosmosdb_account.cosmosdb.id
+  principal_id         = data.azurerm_client_config.current.object_id
+}
+
+resource "azurerm_role_assignment" "storage_blob_data_contributor" {
+  scope                = azurerm_storage_account.storage_account.id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id         = data.azurerm_client_config.current.object_id
 }

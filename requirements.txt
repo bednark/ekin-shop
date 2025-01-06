@@ -1,0 +1,4 @@
+python-dotenv~=1.0.1
+azure-cosmos~=4.9.0
+azure-storage-blob~=12.24.0
+azure-identity~=1.19.0
